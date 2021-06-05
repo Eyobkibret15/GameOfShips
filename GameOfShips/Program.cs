@@ -94,71 +94,72 @@ namespace GameOfShips
             while (validity == 1)
             {
 
-                Console.WriteLine("please enter first proper x and y cordinate for the 4-masterd ship recpectively ?");
+                Console.WriteLine("please enter first proper row and column cordinate for the 4-masterd ship recpectively ?");
                 first_row = Convert.ToInt32(Console.ReadLine());
                 first_colm = Convert.ToInt32(Console.ReadLine());
-                if (bord[first_row, first_colm] != "8" && first_row >= 1 && first_row <= 10)
-                {
-                    Console.WriteLine("please enter the last proper x and y cordinate for the 4-masterd ship recpectively ?");
-                    last_row = Convert.ToInt32(Console.ReadLine());
-                    last_colm = Convert.ToInt32(Console.ReadLine());
-                    if (bord[last_row, last_colm] == "8" || last_row < 1 || last_colm > 10)
-                    {
-                        Console.WriteLine("please enter the proper cells \n Try again");
-                        continue;
-                    }
-
-                    if (!((last_row - first_row == 0 && last_colm - first_colm == 3) || (last_row - first_row == 3 && last_colm - first_colm == 0)))
-                    {
-                        Console.WriteLine("please enter the proper cells \n Try again");
-                        continue;
-                    }
-
-                    for (int i = first_row; i <= last_row; i++)
-                    {
-                        for (int j = first_colm; j <= last_colm; j++)
-                        {
-                            if (bord[i, j] == "8")
-                            {
-                                Console.WriteLine("please enter the proper cells \n Try again");
-                                continue;
-                            }
-                            bord[i, j] = "8";
-                        }
-                    }
-
-                    for (int i = first_row; i <= last_row; i++)
-                    {
-                        for (int j = first_colm; j <= last_colm; j++)
-                        {
-                            bord[i, j] = "8";
-                        }
-                    }
-                }
-                else
+                if ( first_row < 1 || first_row > 10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
+
+                Console.WriteLine("please enter the last proper row and column cordinate for the 4-masterd ship recpectively ?");
+                last_row = Convert.ToInt32(Console.ReadLine());
+                last_colm = Convert.ToInt32(Console.ReadLine());
+                if (last_row < 1 || last_colm > 10)
+                {
+                    Console.WriteLine("please enter the proper cells \n Try again");
+                    continue;
+                }
+
+                if (!((last_row - first_row == 0 && last_colm - first_colm == 3) || (last_row - first_row == 3 && last_colm - first_colm == 0)))
+                {
+                    Console.WriteLine("please enter the proper cells \n Try again");
+                    continue;
+                }
+
+                for (int i = first_row; i <= last_row; i++)
+                {
+                    for (int j = first_colm; j <= last_colm; j++)
+                    {
+                        if (bord[i, j] == "8")
+                        {
+                            Console.WriteLine("please enter the proper cells \n Try again");
+                            continue;
+                        }
+                        bord[i, j] = "8";
+                    }
+                }
+
+                for (int i = first_row; i <= last_row; i++)
+                {
+                    for (int j = first_colm; j <= last_colm; j++)
+                    {
+                        bord[i, j] = "8";
+                    }
+                }
+
+                validity++;
+                
             }
             Console.WriteLine("selcet the cordinates for the 3-masterd ship they should be 3 cells long each !!!");
             validity = 1;
             while (validity <= 2)
             {
-                Console.WriteLine("please enter first proper x and y cordinate for the 3-masterd ship recpectively ?");
+                Console.WriteLine("please enter first proper row and column cordinate for the 3-masterd ship recpectively ?");
                     
                 first_row = Convert.ToInt32(Console.ReadLine());
                 first_colm = Convert.ToInt32(Console.ReadLine());
-                if(bord[first_row,first_colm]=="8" || first_row < 1 ||  first_row >10)
+                if(first_row < 1 ||  first_row >10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
-                Console.WriteLine("please enter the last proper x and y cordinate for the 3-masterd ship recpectively ?");
+                Console.WriteLine("please enter the last proper row and column cordinate for the 3-masterd ship recpectively ?");
                 last_row = Convert.ToInt32(Console.ReadLine());
                 last_colm = Convert.ToInt32(Console.ReadLine());
 
-                if (bord[last_row, last_colm] == "8" || last_row < 1 || last_colm >10)
+                if ( last_row < 1 || last_colm >10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
@@ -199,21 +200,21 @@ namespace GameOfShips
             validity = 1;
             while(validity <=3)
             { 
-                Console.WriteLine("please enter first proper x and y cordinate for the 2-masterd ship recpectively ?");
+                Console.WriteLine("please enter first proper row and column cordinate for the 2-masterd ship recpectively ?");
 
                 first_row = Convert.ToInt32(Console.ReadLine());
                 first_colm = Convert.ToInt32(Console.ReadLine());
 
-                if (bord[first_row, first_colm] == "8" || first_row < 1 || first_row > 10)
+                if (first_row < 1 || first_row > 10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                Console.WriteLine("please enter the last proper x and y cordinate for the 2-masterd ship recpectively ?");
+                Console.WriteLine("please enter the last proper row and column cordinate for the 2-masterd ship recpectively ?");
                 last_row = Convert.ToInt32(Console.ReadLine());
                 last_colm = Convert.ToInt32(Console.ReadLine());
-                if (bord[last_row, last_colm] == "8" || last_row < 1 || last_colm > 10)
+                if (last_row < 1 || last_colm > 10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
@@ -244,23 +245,27 @@ namespace GameOfShips
                         bord[i, j] = "8";
                     }
                 }
+
+                validity++;
             }
 
             Console.WriteLine("selcet the cordinates for the 1-masterd ship they should be 1 cells long each !!!");
             validity = 1;
             while(validity<=4)
             {
-                Console.WriteLine("please enter first proper x and y cordinate for the 1-masterd ship recpectively ?");
+                Console.WriteLine("please enter first proper row and column cordinate for the 1-masterd ship recpectively ?");
 
                 first_row = Convert.ToInt32(Console.ReadLine());
                 first_colm = Convert.ToInt32(Console.ReadLine());
-                if (bord[first_row, first_colm] == "8" || first_row < 1 || first_colm > 10)
+                if (first_row < 1 || first_colm > 10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
                 bord[first_row, first_colm] = "8";
+
+                validity++;
 
             }
 
