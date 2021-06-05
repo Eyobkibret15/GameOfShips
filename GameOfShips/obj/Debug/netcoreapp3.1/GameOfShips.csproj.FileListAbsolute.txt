@@ -1,0 +1,13 @@
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\bin\Debug\netcoreapp3.1\GameOfShips.exe
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\bin\Debug\netcoreapp3.1\GameOfShips.deps.json
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\bin\Debug\netcoreapp3.1\GameOfShips.runtimeconfig.json
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\bin\Debug\netcoreapp3.1\GameOfShips.runtimeconfig.dev.json
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\bin\Debug\netcoreapp3.1\GameOfShips.dll
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\bin\Debug\netcoreapp3.1\GameOfShips.pdb
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\obj\Debug\netcoreapp3.1\GameOfShips.csprojAssemblyReference.cache
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\obj\Debug\netcoreapp3.1\GameOfShips.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\obj\Debug\netcoreapp3.1\GameOfShips.AssemblyInfo.cs
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\obj\Debug\netcoreapp3.1\GameOfShips.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\obj\Debug\netcoreapp3.1\GameOfShips.dll
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\obj\Debug\netcoreapp3.1\GameOfShips.pdb
+C:\Users\HP\source\repos\GameOfShips\GameOfShips\obj\Debug\netcoreapp3.1\GameOfShips.genruntimeconfig.cache
