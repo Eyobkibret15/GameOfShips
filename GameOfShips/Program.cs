@@ -19,7 +19,7 @@ namespace GameOfShips
             Console.WriteLine("do you want to see opponent bord y/n ?");
             string choice = Console.ReadLine().ToLower();
 
-            if (choice == "y" || choice == "yes")
+                if (choice == "y" || choice == "yes")
             {
                 displaying_opponent_bord();
             }
@@ -86,54 +86,62 @@ namespace GameOfShips
         static string[,] User_master_ships(string[,] bord)
         {
             int validity = 1;
-            int first_row;
-            int first_colm;
+            int starting_row;
+            int starting_column;
             int last_row;
-            int last_colm;
+            int last_column;
             Console.WriteLine("selcet the cordinates for the 4-masterd ship they should be 4 cells long each !!!");
             while (validity == 1)
             {
 
-                Console.WriteLine("please enter first proper row and column cordinate for the 4-masterd ship recpectively ?");
-                first_row = Convert.ToInt32(Console.ReadLine());
-                first_colm = Convert.ToInt32(Console.ReadLine());
-                if ( first_row < 1 || first_row > 10)
+                Console.WriteLine("please enter the starting proper row and column cordinate from 1 to 10 for the 4-masterd ship recpectively ?");
+                starting_row = Convert.ToInt32(Console.ReadLine());
+                starting_column = Convert.ToInt32(Console.ReadLine());
+                if (starting_row < 1 || starting_row > 10 || starting_column < 1 || starting_column >10 )
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                Console.WriteLine("please enter the last proper row and column cordinate for the 4-masterd ship recpectively ?");
-                last_row = Convert.ToInt32(Console.ReadLine());
-                last_colm = Convert.ToInt32(Console.ReadLine());
-                if (last_row < 1 || last_colm > 10)
+                Console.WriteLine("do you want to fill the ship cells to the (right or down) from the starting cell choose r/d ? ");
+                string fill = Console.ReadLine().ToLower();
+                if (fill == "r" || fill == "right")
+                {
+                    last_row = starting_row;
+                    last_column  = starting_column +3;
+                }
+                else if (fill == "d" || fill == "down")
+                {
+                    last_row = starting_row+3;
+                    last_column = starting_column;
+                }
+                else
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                if (!((last_row - first_row == 0 && last_colm - first_colm == 3) || (last_row - first_row == 3 && last_colm - first_colm == 0)))
+                if (last_row < 1 || last_row > 10 || last_column < 1 || last_column >10 )
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                for (int i = first_row; i <= last_row; i++)
+                for (int i = starting_row ; i <= last_row ; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column ; j <= last_column; j++)
                     {
                         if (bord[i, j] == "8")
                         {
                             Console.WriteLine("please enter the proper cells \n Try again");
                             continue;
                         }
-                        bord[i, j] = "8";
                     }
                 }
 
-                for (int i = first_row; i <= last_row; i++)
+                for (int i = starting_row ; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         bord[i, j] = "8";
                     }
@@ -146,107 +154,123 @@ namespace GameOfShips
             validity = 1;
             while (validity <= 2)
             {
-                Console.WriteLine("please enter first proper row and column cordinate for the 3-masterd ship recpectively ?");
-                    
-                first_row = Convert.ToInt32(Console.ReadLine());
-                first_colm = Convert.ToInt32(Console.ReadLine());
-                if(first_row < 1 ||  first_row >10)
-                {
-                    Console.WriteLine("please enter the proper cells \n Try again");
-                    continue;
-                }
-                Console.WriteLine("please enter the last proper row and column cordinate for the 3-masterd ship recpectively ?");
-                last_row = Convert.ToInt32(Console.ReadLine());
-                last_colm = Convert.ToInt32(Console.ReadLine());
-
-                if ( last_row < 1 || last_colm >10)
+                Console.WriteLine("please enter the starting row and column  cordinate from 1 to 10  for the 3-masterd ship recpectively ?");
+                starting_row = Convert.ToInt32(Console.ReadLine());
+                starting_column = Convert.ToInt32(Console.ReadLine());
+                if (starting_row < 1 || starting_row > 10 || starting_column < 1 || starting_column > 10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                if (!((last_row - first_row == 0 && last_colm - first_colm == 2) || (last_row - first_row == 2 && last_colm - first_colm == 0)))
+                Console.WriteLine("do you want to fill the ship cells to the (right or down) from the starting cell choose r/d ? ");
+                string fill = Console.ReadLine().ToLower();
+                if (fill == "r" || fill == "right")
+                {
+                    last_row = starting_row;
+                    last_column = starting_column + 2;
+                }
+                else if (fill == "d" || fill == "down")
+                {
+                    last_row = starting_row + 2;
+                    last_column = starting_column;
+                }
+                else
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                for (int i = first_row; i <= last_row; i++)
-                {
-                    for (int j = first_colm; j <= last_colm; j++)
-                    {
-                        if(bord[i,j]=="8")
-                        {
-                            Console.WriteLine("please enter the proper cells \n Try again");
-                            continue;
-                        }
-                        bord[i, j] = "8";
-                    }
-                }
-                for (int i = first_row; i <= last_row; i++)
-                {
-                    for (int j = first_colm; j <= last_colm; j++)
-                    {
-                        bord[i, j] = "8";
-                    }
-                }
-
-
-                validity++;
-                
-            }
-
-            Console.WriteLine("selcet the cordinates for the 2-masterd ship they should be 2 cells long each !!!");
-            validity = 1;
-            while(validity <=3)
-            { 
-                Console.WriteLine("please enter first proper row and column cordinate for the 2-masterd ship recpectively ?");
-
-                first_row = Convert.ToInt32(Console.ReadLine());
-                first_colm = Convert.ToInt32(Console.ReadLine());
-
-                if (first_row < 1 || first_row > 10)
+                if (last_row < 1 || last_row > 10 || last_column < 1 || last_column > 10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                Console.WriteLine("please enter the last proper row and column cordinate for the 2-masterd ship recpectively ?");
-                last_row = Convert.ToInt32(Console.ReadLine());
-                last_colm = Convert.ToInt32(Console.ReadLine());
-                if (last_row < 1 || last_colm > 10)
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    Console.WriteLine("please enter the proper cells \n Try again");
-                    continue;
-                }
-
-                if (!((last_row - first_row == 0 && last_colm - first_colm == 1) || (last_row - first_row == 1 && last_colm - first_colm == 0)))
-                {
-                    Console.WriteLine("please enter the proper cells \n Try again");
-                    continue;
-
-                }
-                for (int i = first_row; i <= last_row; i++)
-                {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         if (bord[i, j] == "8")
                         {
                             Console.WriteLine("please enter the proper cells \n Try again");
                             continue;
                         }
-                        bord[i, j] = "8";
                     }
                 }
-                for (int i = first_row; i <= last_row; i++)
+
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         bord[i, j] = "8";
                     }
                 }
 
                 validity++;
+
+
+            }
+
+            Console.WriteLine("selcet the cordinates for the 2-masterd ship they should be 2 cells long each !!!");
+            validity = 1;
+            while(validity <=3)
+            { 
+                Console.WriteLine("please enter the starting row and column cordinate from 1 to 10 for the 2-masterd ship recpectively ?");
+
+                starting_row = Convert.ToInt32(Console.ReadLine());
+                starting_column = Convert.ToInt32(Console.ReadLine());
+                if (starting_row < 1 || starting_row > 10 || starting_column < 1 || starting_column > 10)
+                {
+                    Console.WriteLine("please enter the proper cells \n Try again");
+                    continue;
+                }
+
+                Console.WriteLine("do you want to fill the ship cells to the (right or down) from the starting cell choose r/d ? ");
+                string fill = Console.ReadLine().ToLower();
+                if (fill == "r" || fill == "right")
+                {
+                    last_row = starting_row;
+                    last_column = starting_column + 1;
+                }
+                else if (fill == "d" || fill == "down")
+                {
+                    last_row = starting_row + 1;
+                    last_column = starting_column;
+                }
+                else
+                {
+                    Console.WriteLine("please enter the proper cells \n Try again");
+                    continue;
+                }
+
+                if (last_row < 1 || last_row > 10 || last_column < 1 || last_column > 10)
+                {
+                    Console.WriteLine("please enter the proper cells \n Try again");
+                    continue;
+                }
+                for (int i = starting_row; i <= last_row; i++)
+                {
+                    for (int j = starting_column; j <= last_column; j++)
+                    {
+                        if (bord[i, j] == "8")
+                        {
+                            Console.WriteLine("please enter the proper cells \n Try again");
+                            continue;
+                        }
+                    }
+                }
+
+                for (int i = starting_row; i <= last_row; i++)
+                {
+                    for (int j = starting_column; j <= last_column; j++)
+                    {
+                        bord[i, j] = "8";
+                    }
+                }
+
+                validity++;
+
             }
 
             Console.WriteLine("selcet the cordinates for the 1-masterd ship they should be 1 cells long each !!!");
@@ -255,15 +279,15 @@ namespace GameOfShips
             {
                 Console.WriteLine("please enter first proper row and column cordinate for the 1-masterd ship recpectively ?");
 
-                first_row = Convert.ToInt32(Console.ReadLine());
-                first_colm = Convert.ToInt32(Console.ReadLine());
-                if (first_row < 1 || first_colm > 10)
+                starting_row = Convert.ToInt32(Console.ReadLine());
+                starting_column = Convert.ToInt32(Console.ReadLine());
+                if (starting_row < 1 || starting_row > 10 || starting_column < 1 || starting_column > 10)
                 {
                     Console.WriteLine("please enter the proper cells \n Try again");
                     continue;
                 }
 
-                bord[first_row, first_colm] = "8";
+                bord[ starting_row , starting_column ] = "8";
 
                 validity++;
 
@@ -278,36 +302,51 @@ namespace GameOfShips
             int validity = 1;
 
             Random random = new Random();
-            int first_row ;
-            int first_colm ;
+            int starting_row ;
+            int starting_column ;
             int last_row ;
-            int last_colm ;
+            int last_column;
             
             while(validity==1)
             {
-                first_row = random.Next(1, 11);
-                first_colm = random.Next(1, 11);
-                last_row = random.Next(1, 11);
-                last_colm = random.Next(1, 11);
-                if (!((last_row - first_row == 0 && last_colm - first_colm == 3) || (last_row - first_row == 3 && last_colm - first_colm == 0)))
+                starting_row = random.Next(1, 11);
+                starting_column = random.Next(1, 11);
+
+
+                int choose = random.Next(1, 3);
+
+                if (choose ==1)
                 {
+                    last_row = starting_row;
+                    last_column = starting_column + 3;
+                }
+                else 
+                {
+                    last_row = starting_row + 3;
+                    last_column = starting_column;
+                }
+
+                if (last_row < 1 || last_row > 10 || last_column < 1 || last_column > 10)
+                {
+                    
                     continue;
                 }
-                for (int i = first_row; i <= last_row; i++)
+
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
-                        if (bord[i, j] == "8" )
+                        if (bord[i, j] == "8")
                         {
-             
+                            
                             continue;
                         }
                     }
                 }
 
-                for (int i = first_row; i <= last_row; i++)
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         bord[i, j] = "8";
                     }
@@ -320,35 +359,49 @@ namespace GameOfShips
             while (validity <= 2)
             {
 
-                first_row = random.Next(1, 11);
-                first_colm = random.Next(1, 11);
-                last_row = random.Next(1, 11);
-                last_colm = random.Next(1, 11);
+                starting_row = random.Next(1, 11);
+                starting_column = random.Next(1, 11);
 
-                if (!((last_row - first_row == 0 && last_colm - first_colm == 2) || (last_row - first_row == 2 && last_colm - first_colm == 0)))
+
+
+                int choose = random.Next(1, 3);
+
+                if (choose == 1)
                 {
-                    
+                    last_row = starting_row;
+                    last_column = starting_column + 2;
+                }
+                else
+                {
+                    last_row = starting_row + 2;
+                    last_column = starting_column;
+                }
+
+                if (last_row < 1 || last_row > 10 || last_column < 1 || last_column > 10)
+                {
+
                     continue;
                 }
-                for (int i = first_row; i <= last_row; i++)
+
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         if (bord[i, j] == "8")
                         {
+
                             continue;
                         }
-                        bord[i, j] = "8";
                     }
                 }
-                for (int i = first_row; i <= last_row; i++)
+
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         bord[i, j] = "8";
                     }
                 }
-
 
                 validity++;
 
@@ -358,32 +411,44 @@ namespace GameOfShips
             validity = 1;
             while (validity <= 3)
             {
-                first_row = random.Next(1, 11);
-                first_colm = random.Next(1, 11);
-                last_row = random.Next(1, 11);
-                last_colm = random.Next(1, 11);
+                starting_row = random.Next(1, 11);
+                starting_column = random.Next(1, 11);
 
-                if (!((last_row - first_row == 0 && last_colm - first_colm == 1) || (last_row - first_row == 1 && last_colm - first_colm == 0)))
+
+                int choose = random.Next(1, 3);
+
+                if (choose == 1)
                 {
-                   
+                    last_row = starting_row;
+                    last_column = starting_column + 1;
+                }
+                else
+                {
+                    last_row = starting_row + 1;
+                    last_column = starting_column;
+                }
+
+                if (last_row < 1 || last_row > 10 || last_column < 1 || last_column > 10)
+                {
+
                     continue;
                 }
 
-                for (int i = first_row; i <= last_row; i++)
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         if (bord[i, j] == "8")
                         {
-                            
+
                             continue;
                         }
-                        bord[i, j] = "8";
                     }
                 }
-                for (int i = first_row; i <= last_row; i++)
+
+                for (int i = starting_row; i <= last_row; i++)
                 {
-                    for (int j = first_colm; j <= last_colm; j++)
+                    for (int j = starting_column; j <= last_column; j++)
                     {
                         bord[i, j] = "8";
                     }
@@ -396,16 +461,16 @@ namespace GameOfShips
             validity = 1;
             while (validity <= 4)
             {
-                first_row = random.Next(1, 11);
-                first_colm = random.Next(1, 11);
+                starting_row = random.Next(1, 11);
+                starting_column = random.Next(1, 11);
 
-                if(bord[first_row,first_colm]=="8")
+                if(bord[starting_row,starting_column]=="8")
                 {
         
                     continue;
                 }
 
-                bord[first_row, first_colm] = "8";
+                bord[starting_row, starting_column] = "8";
                 validity++;
 
             }
