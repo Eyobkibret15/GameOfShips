@@ -69,11 +69,11 @@ namespace GameOfShips
                 if (opponent_bord[fire_row, fire_column] == "8")
                 {
                     Console.WriteLine("you damage one cell you have second shot\n , fire again");
-                    demo_opponent_bord[fire_row, fire_column] = "X";
                     opponent_bord[fire_row, fire_column] = "X";
                     Turn_Count += 1;
                     total_enemy_damage += 1;
                     marke_sunken_ships(fire_row, fire_column);
+                    demo_opponent_bord[fire_row, fire_column] = "X";
                     if (total_enemy_damage > 19)
                     {
                         Console.WriteLine("CONGRATULATION YOU WIN THE GAME");
@@ -93,7 +93,7 @@ namespace GameOfShips
 
                 else if (demo_opponent_bord[fire_row, fire_column] == ".")
                 {
-                    Console.WriteLine("you miss the target \n , opponent's turn");
+                    Console.WriteLine("you miss the target \n , opponent's turn >>>>>>>>>>");
                     Turn_Count += 1;
                     demo_opponent_bord[fire_row, fire_column] = "!";
                     opponents_fire();
@@ -102,6 +102,13 @@ namespace GameOfShips
                 {
                     Console.WriteLine("you miss the target,you already shot it \n , try again");
                     continue;
+                }
+                else if (opponent_bord[fire_row, fire_column] == ".")
+                {
+                    Console.WriteLine("you miss the target \n , opponent's turn >>>>>>>>>>");
+                    Turn_Count += 1;
+                    demo_opponent_bord[fire_row, fire_column] = "!";
+                    opponents_fire();
                 }
                 else
                 {
@@ -133,13 +140,19 @@ namespace GameOfShips
                                 y_mark = a1_ship4[0][1];
                                 if (!(x_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 x_mark = a1_ship4[3][0] + 1;
-                                y_mark = a1_ship4[3][1] + 1;
+                                y_mark = a1_ship4[3][1];
                                 if (!(x_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 3; j++)
                                 {
@@ -147,12 +160,18 @@ namespace GameOfShips
                                     x_mark = a1_ship4[j][0];
                                     if (!(y_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     y_mark = a1_ship4[j][1] + 1;
                                     if (!(y_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -161,13 +180,19 @@ namespace GameOfShips
                                 y_mark = a1_ship4[0][1] - 1;
                                 if (!(y_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 y_mark = a1_ship4[3][1] + 1;
                                 x_mark = a1_ship4[3][0];
                                 if (!(y_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 3; j++)
                                 {
@@ -175,12 +200,18 @@ namespace GameOfShips
                                     x_mark = a1_ship4[j][0] - 1;
                                     if (!(x_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     x_mark = a1_ship4[j][0] + 1;
                                     if (!(x_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -211,13 +242,19 @@ namespace GameOfShips
                                 y_mark = b1_ship3[0][1];
                                 if (!(x_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 x_mark = b1_ship3[2][0] + 1;
-                                y_mark = b1_ship3[2][1] + 1;
+                                y_mark = b1_ship3[2][1];
                                 if (!(x_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 2; j++)
                                 {
@@ -225,12 +262,18 @@ namespace GameOfShips
                                     x_mark = b1_ship3[j][0];
                                     if (!(y_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     y_mark = b1_ship3[j][1] + 1;
                                     if (!(y_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -239,13 +282,19 @@ namespace GameOfShips
                                 y_mark = b1_ship3[0][1] - 1;
                                 if (!(y_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 y_mark = b1_ship3[2][1] + 1;
                                 x_mark = b1_ship3[2][0];
                                 if (!(y_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 2; j++)
                                 {
@@ -253,12 +302,18 @@ namespace GameOfShips
                                     x_mark = b1_ship3[j][0] - 1;
                                     if (!(x_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     x_mark = b1_ship3[j][0] + 1;
                                     if (!(x_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -289,13 +344,19 @@ namespace GameOfShips
                                 y_mark = b2_ship3[0][1];
                                 if (!(x_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 x_mark = b2_ship3[2][0] + 1;
-                                y_mark = b2_ship3[2][1] + 1;
+                                y_mark = b2_ship3[2][1];
                                 if (!(x_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 2; j++)
                                 {
@@ -303,12 +364,18 @@ namespace GameOfShips
                                     x_mark = b2_ship3[j][0];
                                     if (!(y_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     y_mark = b2_ship3[j][1] + 1;
                                     if (!(y_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -317,13 +384,19 @@ namespace GameOfShips
                                 y_mark = b2_ship3[0][1] - 1;
                                 if (!(y_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 y_mark = b2_ship3[2][1] + 1;
                                 x_mark = b2_ship3[2][0];
                                 if (!(y_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 2; j++)
                                 {
@@ -331,12 +404,18 @@ namespace GameOfShips
                                     x_mark = b2_ship3[j][0] - 1;
                                     if (!(x_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     x_mark = b2_ship3[j][0] + 1;
                                     if (!(x_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -363,17 +442,24 @@ namespace GameOfShips
                         switch (c1_ship2[2][0])
                         {
                             case 0:
+                                Console.WriteLine("reeeeeeee");
                                 x_mark = c1_ship2[0][0] - 1;
                                 y_mark = c1_ship2[0][1];
                                 if (!(x_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 x_mark = c1_ship2[1][0] + 1;
-                                y_mark = c1_ship2[1][1] + 1;
+                                y_mark = c1_ship2[1][1];
                                 if (!(x_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 1; j++)
                                 {
@@ -381,12 +467,18 @@ namespace GameOfShips
                                     x_mark = c1_ship2[j][0];
                                     if (!(y_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     y_mark = c1_ship2[j][1] + 1;
                                     if (!(y_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -395,27 +487,39 @@ namespace GameOfShips
                                 y_mark = c1_ship2[0][1] - 1;
                                 if (!(y_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 y_mark = c1_ship2[1][1] + 1;
                                 x_mark = c1_ship2[1][0];
                                 if (!(y_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 1; j++)
                                 {
-                                    y_mark = c1_ship2[j][1];
-                                    x_mark = c1_ship2[j][0] - 1;
-                                    if (!(x_mark < 1))
+                                y_mark = c1_ship2[j][1];
+                                x_mark = c1_ship2[j][0] - 1;
+                                if (!(x_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    { 
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                x_mark = c1_ship2[j][0] + 1;
+                                if (!(x_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
                                     {
                                         demo_opponent_bord[x_mark, y_mark] = "*";
                                     }
-                                    x_mark = c1_ship2[j][0] + 1;
-                                    if (!(x_mark > 10))
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
+                                }
                                 }
                                 break;
                         }
@@ -441,17 +545,24 @@ namespace GameOfShips
                         switch (c2_ship2[2][0])
                         {
                             case 0:
+                                Console.WriteLine("reeeeeeee");
                                 x_mark = c2_ship2[0][0] - 1;
                                 y_mark = c2_ship2[0][1];
                                 if (!(x_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 x_mark = c2_ship2[1][0] + 1;
-                                y_mark = c2_ship2[1][1] + 1;
+                                y_mark = c2_ship2[1][1];
                                 if (!(x_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 1; j++)
                                 {
@@ -459,13 +570,19 @@ namespace GameOfShips
                                     x_mark = c2_ship2[j][0];
                                     if (!(y_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                            if (opponent_bord[x_mark, y_mark] != "X")
+                                            {
+                                                demo_opponent_bord[x_mark, y_mark] = "*";
+                                            }
                                     }
                                     y_mark = c2_ship2[j][1] + 1;
                                     if (!(y_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
+                                            if (opponent_bord[x_mark, y_mark] != "X")
+                                            {
+                                                demo_opponent_bord[x_mark, y_mark] = "*";
+                                            }
+                                        }
                                 }
                                 break;
                             case 1:
@@ -473,27 +590,39 @@ namespace GameOfShips
                                 y_mark = c2_ship2[0][1] - 1;
                                 if (!(y_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
-                                }
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
                                 y_mark = c2_ship2[1][1] + 1;
                                 x_mark = c2_ship2[1][0];
                                 if (!(y_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
-                                }
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
                                 for (int j = 0; j <= 1; j++)
                                 {
                                     y_mark = c2_ship2[j][1];
                                     x_mark = c2_ship2[j][0] - 1;
                                     if (!(x_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
+                                            if (opponent_bord[x_mark, y_mark] != "X")
+                                            {
+                                                demo_opponent_bord[x_mark, y_mark] = "*";
+                                            }
+                                        }
                                     x_mark = c2_ship2[j][0] + 1;
                                     if (!(x_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
+                                            if (opponent_bord[x_mark, y_mark] != "X")
+                                            {
+                                                demo_opponent_bord[x_mark, y_mark] = "*";
+                                            }
+                                        }
                                 }
                                 break;
                         }
@@ -519,17 +648,24 @@ namespace GameOfShips
                         switch (c3_ship2[2][0])
                         {
                             case 0:
+                                Console.WriteLine("reeeeeeee");
                                 x_mark = c3_ship2[0][0] - 1;
                                 y_mark = c3_ship2[0][1];
                                 if (!(x_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 x_mark = c3_ship2[1][0] + 1;
-                                y_mark = c3_ship2[1][1] + 1;
+                                y_mark = c3_ship2[1][1];
                                 if (!(x_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 1; j++)
                                 {
@@ -537,12 +673,18 @@ namespace GameOfShips
                                     x_mark = c3_ship2[j][0];
                                     if (!(y_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     y_mark = c3_ship2[j][1] + 1;
                                     if (!(y_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -551,13 +693,19 @@ namespace GameOfShips
                                 y_mark = c3_ship2[0][1] - 1;
                                 if (!(y_mark < 1))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 y_mark = c3_ship2[1][1] + 1;
                                 x_mark = c3_ship2[1][0];
                                 if (!(y_mark > 10))
                                 {
-                                    demo_opponent_bord[x_mark, y_mark] = "*";
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
                                 }
                                 for (int j = 0; j <= 1; j++)
                                 {
@@ -565,12 +713,18 @@ namespace GameOfShips
                                     x_mark = c3_ship2[j][0] - 1;
                                     if (!(x_mark < 1))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                     x_mark = c3_ship2[j][0] + 1;
                                     if (!(x_mark > 10))
                                     {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
                                     }
                                 }
                                 break;
@@ -589,31 +743,43 @@ namespace GameOfShips
             {
                 d1_ship1_damage++;
                 found = true;
-                if (d1_ship1_damage > 1)
+                if (d1_ship1_damage > 0)
                 {
                     x_mark = d1_ship1[0][0] - 1;
                     y_mark = d1_ship1[0][1];
                     if (!(x_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d1_ship1[0][0] + 1;
                     y_mark = d1_ship1[0][1];
                     if (!(x_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d1_ship1[0][0];
                     y_mark = d1_ship1[0][1]-1;
                     if (!(y_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d1_ship1[0][0];
                     y_mark = d1_ship1[0][1] + 1; ;
                     if (!(y_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                 }
             }
@@ -626,31 +792,43 @@ namespace GameOfShips
             {
                 d2_ship1_damage++;
                 found = true;
-                if (d2_ship1_damage > 1)
+                if (d2_ship1_damage > 0)
                 {
                     x_mark = d2_ship1[0][0] - 1;
                     y_mark = d2_ship1[0][1];
                     if (!(x_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d2_ship1[0][0] + 1;
                     y_mark = d2_ship1[0][1];
                     if (!(x_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d2_ship1[0][0];
                     y_mark = d2_ship1[0][1] - 1;
                     if (!(y_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d2_ship1[0][0];
                     y_mark = d2_ship1[0][1] + 1; ;
                     if (!(y_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                 }
             }
@@ -662,31 +840,43 @@ namespace GameOfShips
             {
                 d3_ship1_damage++;
                 found = true;
-                if (d3_ship1_damage > 1)
+                if (d3_ship1_damage > 0)
                 {
                     x_mark = d3_ship1[0][0] - 1;
                     y_mark = d3_ship1[0][1];
                     if (!(x_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d3_ship1[0][0] + 1;
                     y_mark = d3_ship1[0][1];
                     if (!(x_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d3_ship1[0][0];
                     y_mark = d3_ship1[0][1] - 1;
                     if (!(y_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d3_ship1[0][0];
                     y_mark = d3_ship1[0][1] + 1; ;
                     if (!(y_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                 }
             }
@@ -699,31 +889,43 @@ namespace GameOfShips
             {
                 d4_ship1_damage++;
                 found = true;
-                if (d4_ship1_damage > 1)
+                if (d4_ship1_damage > 0)
                 {
                     x_mark = d4_ship1[0][0] - 1;
                     y_mark = d4_ship1[0][1];
                     if (!(x_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d4_ship1[0][0] + 1;
                     y_mark = d4_ship1[0][1];
                     if (!(x_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d4_ship1[0][0];
                     y_mark = d4_ship1[0][1] - 1;
                     if (!(y_mark < 1))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                     x_mark = d4_ship1[0][0];
                     y_mark = d4_ship1[0][1] + 1; ;
                     if (!(y_mark > 10))
                     {
-                        demo_opponent_bord[x_mark, y_mark] = "*";
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
                     }
                 }
             }
@@ -1240,6 +1442,7 @@ namespace GameOfShips
                     last_column = starting_column + 1;
                     switch (validity)
                     {
+ 
                         case 1:
                             c1_ship2[2] = new int[1] { 1 };
                             break;
@@ -1254,6 +1457,7 @@ namespace GameOfShips
                 }
                 else
                 {
+                    
                     last_row = starting_row + 1;
                     last_column = starting_column;
                     switch (validity)
@@ -1294,8 +1498,6 @@ namespace GameOfShips
                     occupied = false;
                     continue;
                 }
-                Console.WriteLine(last_column-starting_column);
-                Console.WriteLine(last_row-starting_row);
                 int count = 0;
                 for (int i = starting_row; i <= last_row; i++)
                 {
