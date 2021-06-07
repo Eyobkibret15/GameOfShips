@@ -4,10 +4,13 @@ namespace GameOfShips
 {
     class Program
     {
+        /*We declear a two dimentional array to store the bords element*/
         static protected string[,] my_bord = new string[11, 11];
         static protected string[,] opponent_bord = new string[11, 11];
         static protected string[,] demo_opponent_bord = new string[11, 11];
 
+        /*We declear a jagged array (aray of aray ) for storing each opponent ship element
+            inorder to use for sink the ship with **/
         static protected int[][] a1_ship4 = new int[5][];
         static protected int[][] b1_ship3 = new int[4][];
         static protected int[][] b2_ship3 = new int[4][];
@@ -18,6 +21,8 @@ namespace GameOfShips
         static protected int[][] d2_ship1 = new int[1][];
         static protected int[][] d3_ship1 = new int[1][];
         static protected int[][] d4_ship1 = new int[1][];
+
+       /* those varibles used to count each ship damage globally*/
         static protected int a1_ship4_damage = 0;
         static protected int b1_ship3_damage = 0;
         static protected int b2_ship3_damage = 0;
@@ -29,8 +34,10 @@ namespace GameOfShips
         static protected int d3_ship1_damage = 0;
         static protected int d4_ship1_damage = 0;
 
-        static protected string[] ships = new string[10] { "a1_ship4", "b1_ship3", "b2_ship3","c1_ship2" ,"c2_ship2","c3_ship2",
-                                                          "d1_ship1","d2_ship1","d3_ship1","d4_ship1"};
+        /*the folowing varible used to identify the winner of the game */
+        static protected int total_user_damage = 0;
+        static protected int Turn_Count = 0;
+        static protected int total_enemy_damage = 0;
         static void Main(string[] args)
         {
             Console.WriteLine("========================================= WELCOME TO GAME OF SHIPS =======================");
@@ -51,14 +58,11 @@ namespace GameOfShips
             displaying_user_bord();
             StartTheGame();
 
-
         }
 
         static void StartTheGame()
         {
 
-            int Turn_Count = 0;
-            int total_enemy_damage = 0;
             Console.WriteLine("this is opponent's masked bord");
             displaying_opponent_bord(demo_opponent_bord);
             while (true)
@@ -71,12 +75,15 @@ namespace GameOfShips
                     Console.WriteLine("you damage one cell you have second shot\n , fire again");
                     opponent_bord[fire_row, fire_column] = "X";
                     Turn_Count += 1;
-                    total_enemy_damage += 1;
+                    total_enemy_damage ++;
                     marke_sunken_ships(fire_row, fire_column);
                     demo_opponent_bord[fire_row, fire_column] = "X";
                     if (total_enemy_damage > 19)
                     {
-                        Console.WriteLine("CONGRATULATION YOU WIN THE GAME");
+                        Console.Write("CONGRATULATION YOU WIN THE GAME");
+                        Console.WriteLine($"with  {Turn_Count} numbr of shots !!!");
+                        displaying_user_bord();
+                        displaying_opponent_bord(demo_opponent_bord);
                         Environment.Exit(1);
                     }
                 }
@@ -118,823 +125,7 @@ namespace GameOfShips
 
         }
 
-        static void marke_sunken_ships(int x, int y)
-        {
-            int x_mark;
-            int y_mark;
-            int count = 0;
-            bool found = false;
-            for (int i = 0; i <= 3; i++)
-            {
-                if (x == a1_ship4[count][0] && y == a1_ship4[count][1])
-                {
-                    a1_ship4_damage++;
-                    found = true;
-                    Console.WriteLine(a1_ship4_damage);
-                    if (a1_ship4_damage > 3)
-                    {
-                        switch (a1_ship4[4][0])
-                        {
-                            case 0:
-                                x_mark = a1_ship4[0][0] - 1;
-                                y_mark = a1_ship4[0][1];
-                                if (!(x_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                x_mark = a1_ship4[3][0] + 1;
-                                y_mark = a1_ship4[3][1];
-                                if (!(x_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 3; j++)
-                                {
-                                    y_mark = a1_ship4[j][1] - 1;
-                                    x_mark = a1_ship4[j][0];
-                                    if (!(y_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    y_mark = a1_ship4[j][1] + 1;
-                                    if (!(y_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                            case 1:
-                                x_mark = a1_ship4[0][0];
-                                y_mark = a1_ship4[0][1] - 1;
-                                if (!(y_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                y_mark = a1_ship4[3][1] + 1;
-                                x_mark = a1_ship4[3][0];
-                                if (!(y_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 3; j++)
-                                {
-                                    y_mark = a1_ship4[j][1];
-                                    x_mark = a1_ship4[j][0] - 1;
-                                    if (!(x_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    x_mark = a1_ship4[j][0] + 1;
-                                    if (!(x_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                    }
-
-                    break;
-                }
-                count++;
-            }
-            if (found)
-            {
-                return;
-            }
-            count = 0;
-            for (int i = 0; i <= 2; i++)
-            {
-                if (x == b1_ship3[count][0] && y == b1_ship3[count][1])
-                {
-                    b1_ship3_damage++;
-                    found = true;
-                    if (b1_ship3_damage > 2)
-                    {
-                        switch (b1_ship3[3][0])
-                        {
-                            case 0:
-                                x_mark = b1_ship3[0][0] - 1;
-                                y_mark = b1_ship3[0][1];
-                                if (!(x_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                x_mark = b1_ship3[2][0] + 1;
-                                y_mark = b1_ship3[2][1];
-                                if (!(x_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 2; j++)
-                                {
-                                    y_mark = b1_ship3[j][1] - 1;
-                                    x_mark = b1_ship3[j][0];
-                                    if (!(y_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    y_mark = b1_ship3[j][1] + 1;
-                                    if (!(y_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                            case 1:
-                                x_mark = b1_ship3[0][0];
-                                y_mark = b1_ship3[0][1] - 1;
-                                if (!(y_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                y_mark = b1_ship3[2][1] + 1;
-                                x_mark = b1_ship3[2][0];
-                                if (!(y_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 2; j++)
-                                {
-                                    y_mark = b1_ship3[j][1];
-                                    x_mark = b1_ship3[j][0] - 1;
-                                    if (!(x_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    x_mark = b1_ship3[j][0] + 1;
-                                    if (!(x_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                    }
-
-                    break;
-                }
-                count++;
-            }
-            if (found)
-            {
-                return;
-            }
-            count = 0;
-            for (int i = 0; i <= 2; i++)
-            {
-                if (x == b2_ship3[count][0] && y == b2_ship3[count][1])
-                {
-                    b2_ship3_damage++;
-                    found = true;
-                    if (b2_ship3_damage > 2)
-                    {
-                        switch (b2_ship3[3][0])
-                        {
-                            case 0:
-                                x_mark = b2_ship3[0][0] - 1;
-                                y_mark = b2_ship3[0][1];
-                                if (!(x_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                x_mark = b2_ship3[2][0] + 1;
-                                y_mark = b2_ship3[2][1];
-                                if (!(x_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 2; j++)
-                                {
-                                    y_mark = b2_ship3[j][1] - 1;
-                                    x_mark = b2_ship3[j][0];
-                                    if (!(y_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    y_mark = b2_ship3[j][1] + 1;
-                                    if (!(y_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                            case 1:
-                                x_mark = b2_ship3[0][0];
-                                y_mark = b2_ship3[0][1] - 1;
-                                if (!(y_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                y_mark = b2_ship3[2][1] + 1;
-                                x_mark = b2_ship3[2][0];
-                                if (!(y_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 2; j++)
-                                {
-                                    y_mark = b2_ship3[j][1];
-                                    x_mark = b2_ship3[j][0] - 1;
-                                    if (!(x_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    x_mark = b2_ship3[j][0] + 1;
-                                    if (!(x_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                    }
-
-                    break;
-                }
-                count++;
-            }
-            if (found)
-            {
-                return;
-            }
-            count = 0;
-            for (int i = 0; i <= 1; i++)
-            {
-                if (x == c1_ship2[count][0] && y == c1_ship2[count][1])
-                {
-                    c1_ship2_damage++;
-                    found = true;
-                    if (c1_ship2_damage > 1)
-                    {
-                        switch (c1_ship2[2][0])
-                        {
-                            case 0:
-                                Console.WriteLine("reeeeeeee");
-                                x_mark = c1_ship2[0][0] - 1;
-                                y_mark = c1_ship2[0][1];
-                                if (!(x_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                x_mark = c1_ship2[1][0] + 1;
-                                y_mark = c1_ship2[1][1];
-                                if (!(x_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 1; j++)
-                                {
-                                    y_mark = c1_ship2[j][1] - 1;
-                                    x_mark = c1_ship2[j][0];
-                                    if (!(y_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    y_mark = c1_ship2[j][1] + 1;
-                                    if (!(y_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                            case 1:
-                                x_mark = c1_ship2[0][0];
-                                y_mark = c1_ship2[0][1] - 1;
-                                if (!(y_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                y_mark = c1_ship2[1][1] + 1;
-                                x_mark = c1_ship2[1][0];
-                                if (!(y_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 1; j++)
-                                {
-                                y_mark = c1_ship2[j][1];
-                                x_mark = c1_ship2[j][0] - 1;
-                                if (!(x_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    { 
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                x_mark = c1_ship2[j][0] + 1;
-                                if (!(x_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                }
-                                break;
-                        }
-                    }
-
-                    break;
-                }
-                count++;
-            }
-            if (found)
-            {
-                return;
-            }
-            count = 0;
-            for (int i = 0; i <= 1; i++)
-            {
-                if (x == c2_ship2[count][0] && y == c2_ship2[count][1])
-                {
-                    c2_ship2_damage++;
-                    found = true;
-                    if (c2_ship2_damage > 1)
-                    {
-                        switch (c2_ship2[2][0])
-                        {
-                            case 0:
-                                Console.WriteLine("reeeeeeee");
-                                x_mark = c2_ship2[0][0] - 1;
-                                y_mark = c2_ship2[0][1];
-                                if (!(x_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                x_mark = c2_ship2[1][0] + 1;
-                                y_mark = c2_ship2[1][1];
-                                if (!(x_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 1; j++)
-                                {
-                                    y_mark = c2_ship2[j][1] - 1;
-                                    x_mark = c2_ship2[j][0];
-                                    if (!(y_mark < 1))
-                                    {
-                                            if (opponent_bord[x_mark, y_mark] != "X")
-                                            {
-                                                demo_opponent_bord[x_mark, y_mark] = "*";
-                                            }
-                                    }
-                                    y_mark = c2_ship2[j][1] + 1;
-                                    if (!(y_mark > 10))
-                                    {
-                                            if (opponent_bord[x_mark, y_mark] != "X")
-                                            {
-                                                demo_opponent_bord[x_mark, y_mark] = "*";
-                                            }
-                                        }
-                                }
-                                break;
-                            case 1:
-                                x_mark = c2_ship2[0][0];
-                                y_mark = c2_ship2[0][1] - 1;
-                                if (!(y_mark < 1))
-                                {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                y_mark = c2_ship2[1][1] + 1;
-                                x_mark = c2_ship2[1][0];
-                                if (!(y_mark > 10))
-                                {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                for (int j = 0; j <= 1; j++)
-                                {
-                                    y_mark = c2_ship2[j][1];
-                                    x_mark = c2_ship2[j][0] - 1;
-                                    if (!(x_mark < 1))
-                                    {
-                                            if (opponent_bord[x_mark, y_mark] != "X")
-                                            {
-                                                demo_opponent_bord[x_mark, y_mark] = "*";
-                                            }
-                                        }
-                                    x_mark = c2_ship2[j][0] + 1;
-                                    if (!(x_mark > 10))
-                                    {
-                                            if (opponent_bord[x_mark, y_mark] != "X")
-                                            {
-                                                demo_opponent_bord[x_mark, y_mark] = "*";
-                                            }
-                                        }
-                                }
-                                break;
-                        }
-                    }
-
-                    break;
-                }
-                count++;
-            }
-            if (found)
-            {
-                return;
-            }
-            count = 0;
-            for (int i = 0; i <= 1; i++)
-            {
-                if (x == c3_ship2[count][0] && y == c3_ship2[count][1])
-                {
-                    c3_ship2_damage++;
-                    found = true;
-                    if (c3_ship2_damage > 1)
-                    {
-                        switch (c3_ship2[2][0])
-                        {
-                            case 0:
-                                Console.WriteLine("reeeeeeee");
-                                x_mark = c3_ship2[0][0] - 1;
-                                y_mark = c3_ship2[0][1];
-                                if (!(x_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                x_mark = c3_ship2[1][0] + 1;
-                                y_mark = c3_ship2[1][1];
-                                if (!(x_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 1; j++)
-                                {
-                                    y_mark = c3_ship2[j][1] - 1;
-                                    x_mark = c3_ship2[j][0];
-                                    if (!(y_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    y_mark = c3_ship2[j][1] + 1;
-                                    if (!(y_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                            case 1:
-                                x_mark = c3_ship2[0][0];
-                                y_mark = c3_ship2[0][1] - 1;
-                                if (!(y_mark < 1))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                y_mark = c3_ship2[1][1] + 1;
-                                x_mark = c3_ship2[1][0];
-                                if (!(y_mark > 10))
-                                {
-                                    if (opponent_bord[x_mark, y_mark] != "X")
-                                    {
-                                        demo_opponent_bord[x_mark, y_mark] = "*";
-                                    }
-                                }
-                                for (int j = 0; j <= 1; j++)
-                                {
-                                    y_mark = c3_ship2[j][1];
-                                    x_mark = c3_ship2[j][0] - 1;
-                                    if (!(x_mark < 1))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                    x_mark = c3_ship2[j][0] + 1;
-                                    if (!(x_mark > 10))
-                                    {
-                                        if (opponent_bord[x_mark, y_mark] != "X")
-                                        {
-                                            demo_opponent_bord[x_mark, y_mark] = "*";
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                    break;
-                }
-                count++;
-            }
-            if (found)
-            {
-                return;
-            }
-
-            if (x == d1_ship1[0][0] && y == d1_ship1[0][1])
-            {
-                d1_ship1_damage++;
-                found = true;
-                if (d1_ship1_damage > 0)
-                {
-                    x_mark = d1_ship1[0][0] - 1;
-                    y_mark = d1_ship1[0][1];
-                    if (!(x_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d1_ship1[0][0] + 1;
-                    y_mark = d1_ship1[0][1];
-                    if (!(x_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d1_ship1[0][0];
-                    y_mark = d1_ship1[0][1]-1;
-                    if (!(y_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d1_ship1[0][0];
-                    y_mark = d1_ship1[0][1] + 1; ;
-                    if (!(y_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                }
-            }
-            if (found)
-            {
-                return;
-            }
-
-            if (x == d2_ship1[0][0] && y == d2_ship1[0][1])
-            {
-                d2_ship1_damage++;
-                found = true;
-                if (d2_ship1_damage > 0)
-                {
-                    x_mark = d2_ship1[0][0] - 1;
-                    y_mark = d2_ship1[0][1];
-                    if (!(x_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d2_ship1[0][0] + 1;
-                    y_mark = d2_ship1[0][1];
-                    if (!(x_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d2_ship1[0][0];
-                    y_mark = d2_ship1[0][1] - 1;
-                    if (!(y_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d2_ship1[0][0];
-                    y_mark = d2_ship1[0][1] + 1; ;
-                    if (!(y_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                }
-            }
-            if (found)
-            {
-                return;
-            }
-            if (x == d3_ship1[0][0] && y == d3_ship1[0][1])
-            {
-                d3_ship1_damage++;
-                found = true;
-                if (d3_ship1_damage > 0)
-                {
-                    x_mark = d3_ship1[0][0] - 1;
-                    y_mark = d3_ship1[0][1];
-                    if (!(x_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d3_ship1[0][0] + 1;
-                    y_mark = d3_ship1[0][1];
-                    if (!(x_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d3_ship1[0][0];
-                    y_mark = d3_ship1[0][1] - 1;
-                    if (!(y_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d3_ship1[0][0];
-                    y_mark = d3_ship1[0][1] + 1; ;
-                    if (!(y_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                }
-            }
-            if (found)
-            {
-                return;
-            }
-
-            if (x == d4_ship1[0][0] && y == d4_ship1[0][1])
-            {
-                d4_ship1_damage++;
-                found = true;
-                if (d4_ship1_damage > 0)
-                {
-                    x_mark = d4_ship1[0][0] - 1;
-                    y_mark = d4_ship1[0][1];
-                    if (!(x_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d4_ship1[0][0] + 1;
-                    y_mark = d4_ship1[0][1];
-                    if (!(x_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d4_ship1[0][0];
-                    y_mark = d4_ship1[0][1] - 1;
-                    if (!(y_mark < 1))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                    x_mark = d4_ship1[0][0];
-                    y_mark = d4_ship1[0][1] + 1; ;
-                    if (!(y_mark > 10))
-                    {
-                        if (opponent_bord[x_mark, y_mark] != "X")
-                        {
-                            demo_opponent_bord[x_mark, y_mark] = "*";
-                        }
-                    }
-                }
-            }
-            if (found)
-            {
-                return;
-            }
-        }
-
+        
         static void displaying_user_bord()
         {
             Console.WriteLine("------------------------------------MY BORD---------------------------------------");
@@ -953,7 +144,6 @@ namespace GameOfShips
         static void opponents_fire()
         {
             Random rand = new Random();
-            int total_user_damage = 0;
             while (true)
             {
                 int fire_row = rand.Next(1, 11);
@@ -964,7 +154,7 @@ namespace GameOfShips
                 }
                 else if (my_bord[fire_row, fire_column] == "8")
                 {
-                    total_user_damage += 1;
+                    total_user_damage ++;
                     if (total_user_damage > 19)
                     {
                         Console.WriteLine("YOU LOSE THE GAME \n PLAY NEW GAME");
@@ -1553,5 +743,823 @@ namespace GameOfShips
 
             return bord;
         }
+
+        static void marke_sunken_ships(int x, int y)
+        {
+            int x_mark;
+            int y_mark;
+            int count = 0;
+            bool found = false;
+            for (int i = 0; i <= 3; i++)
+            {
+                if (x == a1_ship4[count][0] && y == a1_ship4[count][1])
+                {
+                    a1_ship4_damage++;
+                    found = true;
+                    Console.WriteLine(a1_ship4_damage);
+                    if (a1_ship4_damage > 3)
+                    {
+                        switch (a1_ship4[4][0])
+                        {
+                            case 0:
+                                x_mark = a1_ship4[0][0] - 1;
+                                y_mark = a1_ship4[0][1];
+                                if (!(x_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                x_mark = a1_ship4[3][0] + 1;
+                                y_mark = a1_ship4[3][1];
+                                if (!(x_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 3; j++)
+                                {
+                                    y_mark = a1_ship4[j][1] - 1;
+                                    x_mark = a1_ship4[j][0];
+                                    if (!(y_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    y_mark = a1_ship4[j][1] + 1;
+                                    if (!(y_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                            case 1:
+                                x_mark = a1_ship4[0][0];
+                                y_mark = a1_ship4[0][1] - 1;
+                                if (!(y_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                y_mark = a1_ship4[3][1] + 1;
+                                x_mark = a1_ship4[3][0];
+                                if (!(y_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 3; j++)
+                                {
+                                    y_mark = a1_ship4[j][1];
+                                    x_mark = a1_ship4[j][0] - 1;
+                                    if (!(x_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    x_mark = a1_ship4[j][0] + 1;
+                                    if (!(x_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+
+                    break;
+                }
+                count++;
+            }
+            if (found)
+            {
+                return;
+            }
+            count = 0;
+            for (int i = 0; i <= 2; i++)
+            {
+                if (x == b1_ship3[count][0] && y == b1_ship3[count][1])
+                {
+                    b1_ship3_damage++;
+                    found = true;
+                    if (b1_ship3_damage > 2)
+                    {
+                        switch (b1_ship3[3][0])
+                        {
+                            case 0:
+                                x_mark = b1_ship3[0][0] - 1;
+                                y_mark = b1_ship3[0][1];
+                                if (!(x_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                x_mark = b1_ship3[2][0] + 1;
+                                y_mark = b1_ship3[2][1];
+                                if (!(x_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 2; j++)
+                                {
+                                    y_mark = b1_ship3[j][1] - 1;
+                                    x_mark = b1_ship3[j][0];
+                                    if (!(y_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    y_mark = b1_ship3[j][1] + 1;
+                                    if (!(y_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                            case 1:
+                                x_mark = b1_ship3[0][0];
+                                y_mark = b1_ship3[0][1] - 1;
+                                if (!(y_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                y_mark = b1_ship3[2][1] + 1;
+                                x_mark = b1_ship3[2][0];
+                                if (!(y_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 2; j++)
+                                {
+                                    y_mark = b1_ship3[j][1];
+                                    x_mark = b1_ship3[j][0] - 1;
+                                    if (!(x_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    x_mark = b1_ship3[j][0] + 1;
+                                    if (!(x_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+
+                    break;
+                }
+                count++;
+            }
+            if (found)
+            {
+                return;
+            }
+            count = 0;
+            for (int i = 0; i <= 2; i++)
+            {
+                if (x == b2_ship3[count][0] && y == b2_ship3[count][1])
+                {
+                    b2_ship3_damage++;
+                    found = true;
+                    if (b2_ship3_damage > 2)
+                    {
+                        switch (b2_ship3[3][0])
+                        {
+                            case 0:
+                                x_mark = b2_ship3[0][0] - 1;
+                                y_mark = b2_ship3[0][1];
+                                if (!(x_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                x_mark = b2_ship3[2][0] + 1;
+                                y_mark = b2_ship3[2][1];
+                                if (!(x_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 2; j++)
+                                {
+                                    y_mark = b2_ship3[j][1] - 1;
+                                    x_mark = b2_ship3[j][0];
+                                    if (!(y_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    y_mark = b2_ship3[j][1] + 1;
+                                    if (!(y_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                            case 1:
+                                x_mark = b2_ship3[0][0];
+                                y_mark = b2_ship3[0][1] - 1;
+                                if (!(y_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                y_mark = b2_ship3[2][1] + 1;
+                                x_mark = b2_ship3[2][0];
+                                if (!(y_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 2; j++)
+                                {
+                                    y_mark = b2_ship3[j][1];
+                                    x_mark = b2_ship3[j][0] - 1;
+                                    if (!(x_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    x_mark = b2_ship3[j][0] + 1;
+                                    if (!(x_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+
+                    break;
+                }
+                count++;
+            }
+            if (found)
+            {
+                return;
+            }
+            count = 0;
+            for (int i = 0; i <= 1; i++)
+            {
+                if (x == c1_ship2[count][0] && y == c1_ship2[count][1])
+                {
+                    c1_ship2_damage++;
+                    found = true;
+                    if (c1_ship2_damage > 1)
+                    {
+                        switch (c1_ship2[2][0])
+                        {
+                            case 0:
+                                Console.WriteLine("reeeeeeee");
+                                x_mark = c1_ship2[0][0] - 1;
+                                y_mark = c1_ship2[0][1];
+                                if (!(x_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                x_mark = c1_ship2[1][0] + 1;
+                                y_mark = c1_ship2[1][1];
+                                if (!(x_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 1; j++)
+                                {
+                                    y_mark = c1_ship2[j][1] - 1;
+                                    x_mark = c1_ship2[j][0];
+                                    if (!(y_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    y_mark = c1_ship2[j][1] + 1;
+                                    if (!(y_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                            case 1:
+                                x_mark = c1_ship2[0][0];
+                                y_mark = c1_ship2[0][1] - 1;
+                                if (!(y_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                y_mark = c1_ship2[1][1] + 1;
+                                x_mark = c1_ship2[1][0];
+                                if (!(y_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 1; j++)
+                                {
+                                    y_mark = c1_ship2[j][1];
+                                    x_mark = c1_ship2[j][0] - 1;
+                                    if (!(x_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    x_mark = c1_ship2[j][0] + 1;
+                                    if (!(x_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+
+                    break;
+                }
+                count++;
+            }
+            if (found)
+            {
+                return;
+            }
+            count = 0;
+            for (int i = 0; i <= 1; i++)
+            {
+                if (x == c2_ship2[count][0] && y == c2_ship2[count][1])
+                {
+                    c2_ship2_damage++;
+                    found = true;
+                    if (c2_ship2_damage > 1)
+                    {
+                        switch (c2_ship2[2][0])
+                        {
+                            case 0:
+                                Console.WriteLine("reeeeeeee");
+                                x_mark = c2_ship2[0][0] - 1;
+                                y_mark = c2_ship2[0][1];
+                                if (!(x_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                x_mark = c2_ship2[1][0] + 1;
+                                y_mark = c2_ship2[1][1];
+                                if (!(x_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 1; j++)
+                                {
+                                    y_mark = c2_ship2[j][1] - 1;
+                                    x_mark = c2_ship2[j][0];
+                                    if (!(y_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    y_mark = c2_ship2[j][1] + 1;
+                                    if (!(y_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                            case 1:
+                                x_mark = c2_ship2[0][0];
+                                y_mark = c2_ship2[0][1] - 1;
+                                if (!(y_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                y_mark = c2_ship2[1][1] + 1;
+                                x_mark = c2_ship2[1][0];
+                                if (!(y_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 1; j++)
+                                {
+                                    y_mark = c2_ship2[j][1];
+                                    x_mark = c2_ship2[j][0] - 1;
+                                    if (!(x_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    x_mark = c2_ship2[j][0] + 1;
+                                    if (!(x_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+
+                    break;
+                }
+                count++;
+            }
+            if (found)
+            {
+                return;
+            }
+            count = 0;
+            for (int i = 0; i <= 1; i++)
+            {
+                if (x == c3_ship2[count][0] && y == c3_ship2[count][1])
+                {
+                    c3_ship2_damage++;
+                    found = true;
+                    if (c3_ship2_damage > 1)
+                    {
+                        switch (c3_ship2[2][0])
+                        {
+                            case 0:
+                                Console.WriteLine("reeeeeeee");
+                                x_mark = c3_ship2[0][0] - 1;
+                                y_mark = c3_ship2[0][1];
+                                if (!(x_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                x_mark = c3_ship2[1][0] + 1;
+                                y_mark = c3_ship2[1][1];
+                                if (!(x_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 1; j++)
+                                {
+                                    y_mark = c3_ship2[j][1] - 1;
+                                    x_mark = c3_ship2[j][0];
+                                    if (!(y_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    y_mark = c3_ship2[j][1] + 1;
+                                    if (!(y_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                            case 1:
+                                x_mark = c3_ship2[0][0];
+                                y_mark = c3_ship2[0][1] - 1;
+                                if (!(y_mark < 1))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                y_mark = c3_ship2[1][1] + 1;
+                                x_mark = c3_ship2[1][0];
+                                if (!(y_mark > 10))
+                                {
+                                    if (opponent_bord[x_mark, y_mark] != "X")
+                                    {
+                                        demo_opponent_bord[x_mark, y_mark] = "*";
+                                    }
+                                }
+                                for (int j = 0; j <= 1; j++)
+                                {
+                                    y_mark = c3_ship2[j][1];
+                                    x_mark = c3_ship2[j][0] - 1;
+                                    if (!(x_mark < 1))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                    x_mark = c3_ship2[j][0] + 1;
+                                    if (!(x_mark > 10))
+                                    {
+                                        if (opponent_bord[x_mark, y_mark] != "X")
+                                        {
+                                            demo_opponent_bord[x_mark, y_mark] = "*";
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                }
+                count++;
+            }
+            if (found)
+            {
+                return;
+            }
+
+            if (x == d1_ship1[0][0] && y == d1_ship1[0][1])
+            {
+                d1_ship1_damage++;
+                found = true;
+                if (d1_ship1_damage > 0)
+                {
+                    x_mark = d1_ship1[0][0] - 1;
+                    y_mark = d1_ship1[0][1];
+                    if (!(x_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d1_ship1[0][0] + 1;
+                    y_mark = d1_ship1[0][1];
+                    if (!(x_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d1_ship1[0][0];
+                    y_mark = d1_ship1[0][1] - 1;
+                    if (!(y_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d1_ship1[0][0];
+                    y_mark = d1_ship1[0][1] + 1; ;
+                    if (!(y_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                }
+            }
+            if (found)
+            {
+                return;
+            }
+
+            if (x == d2_ship1[0][0] && y == d2_ship1[0][1])
+            {
+                d2_ship1_damage++;
+                found = true;
+                if (d2_ship1_damage > 0)
+                {
+                    x_mark = d2_ship1[0][0] - 1;
+                    y_mark = d2_ship1[0][1];
+                    if (!(x_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d2_ship1[0][0] + 1;
+                    y_mark = d2_ship1[0][1];
+                    if (!(x_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d2_ship1[0][0];
+                    y_mark = d2_ship1[0][1] - 1;
+                    if (!(y_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d2_ship1[0][0];
+                    y_mark = d2_ship1[0][1] + 1; ;
+                    if (!(y_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                }
+            }
+            if (found)
+            {
+                return;
+            }
+            if (x == d3_ship1[0][0] && y == d3_ship1[0][1])
+            {
+                d3_ship1_damage++;
+                found = true;
+                if (d3_ship1_damage > 0)
+                {
+                    x_mark = d3_ship1[0][0] - 1;
+                    y_mark = d3_ship1[0][1];
+                    if (!(x_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d3_ship1[0][0] + 1;
+                    y_mark = d3_ship1[0][1];
+                    if (!(x_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d3_ship1[0][0];
+                    y_mark = d3_ship1[0][1] - 1;
+                    if (!(y_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d3_ship1[0][0];
+                    y_mark = d3_ship1[0][1] + 1; ;
+                    if (!(y_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                }
+            }
+            if (found)
+            {
+                return;
+            }
+
+            if (x == d4_ship1[0][0] && y == d4_ship1[0][1])
+            {
+                d4_ship1_damage++;
+                found = true;
+                if (d4_ship1_damage > 0)
+                {
+                    x_mark = d4_ship1[0][0] - 1;
+                    y_mark = d4_ship1[0][1];
+                    if (!(x_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d4_ship1[0][0] + 1;
+                    y_mark = d4_ship1[0][1];
+                    if (!(x_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d4_ship1[0][0];
+                    y_mark = d4_ship1[0][1] - 1;
+                    if (!(y_mark < 1))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                    x_mark = d4_ship1[0][0];
+                    y_mark = d4_ship1[0][1] + 1; ;
+                    if (!(y_mark > 10))
+                    {
+                        if (opponent_bord[x_mark, y_mark] != "X")
+                        {
+                            demo_opponent_bord[x_mark, y_mark] = "*";
+                        }
+                    }
+                }
+            }
+            if (found)
+            {
+                return;
+            }
+        }
+
     }
 }
